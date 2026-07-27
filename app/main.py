@@ -1,11 +1,11 @@
 from fastapi import FastAPI
 
 from app.api.health import router as health_router
+from app.core.config import settings
 
 app = FastAPI(
-    title="MediAssist AI",
-    description="AI-powered medical research assistant",
-    version="0.1.0"
+    title=settings.app_name,
+    version=settings.version,
 )
 
 app.include_router(health_router)
@@ -13,4 +13,4 @@ app.include_router(health_router)
 
 @app.get("/")
 def root():
-    return {"message": "Welcome to MediAssist AI"}
+    return {"message": f"Welcome to {settings.app_name}"}
