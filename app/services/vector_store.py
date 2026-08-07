@@ -1,8 +1,8 @@
-import chromaDB
+import chromadb
 
 import uuid
 
-client = chromaDB.PersistentClient(path="chroma_db")
+client = chromadb.PersistentClient(path="chroma_db")
 
 collection = client.get_or_create_collection(
     name="medical_documents"
@@ -24,6 +24,8 @@ def add_documents(
         embeddings=embeddings.tolist()
     )
 
+    print(collection.count())
+
 
 
 def search(query_embedding, n_results=3):
@@ -34,3 +36,4 @@ def search(query_embedding, n_results=3):
         )
 
     return results
+
