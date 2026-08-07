@@ -8,4 +8,6 @@ router = APIRouter()
 async def upload_pdf(file: UploadFile = File(...)):
     await validate_pdf(file)
 
-    return await save_pdf(file)
+    upload_response = await save_pdf(file)
+
+    return upload_response

@@ -4,7 +4,7 @@ from fastapi import HTTPException, UploadFile
 import uuid
 from app.core.logging import logger
 from app.schemas.upload import UploadResponse
-
+from app.services.pdf_services import extract_text
 
 async def validate_pdf(file: UploadFile):
 
@@ -70,10 +70,10 @@ async def save_pdf(file: UploadFile) -> UploadResponse:
             detail="Failed to save uploaded file."
         )
     logger.info(f"File saved successfully: {unique_filename}")
-    return UploadResponse(
-        message="File uploaded successfully",
-        original_filename=file.filename,
-        stored_filename=unique_filename,
-    )
+    return {
+        "original_filename": file.filename,
+        "stored_filename": unique_filename,
+        "file_path": file_path
+    }
 
     
