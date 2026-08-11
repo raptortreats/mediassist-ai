@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
-class UploadResponse(BaseModel):
-    message: str
+class Document(BaseModel):
     document_id: str
     original_filename: str
     stored_filename: str
+    

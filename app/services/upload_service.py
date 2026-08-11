@@ -54,6 +54,8 @@ async def save_pdf(file: UploadFile) -> UploadResponse:
 
     extension = Path(file.filename).suffix
 
+    document_id = str(uuid.uuid4())
+
     unique_filename = f"{uuid.uuid4()}{extension}"
 
     file_path = UPLOAD_DIR / unique_filename
@@ -71,6 +73,7 @@ async def save_pdf(file: UploadFile) -> UploadResponse:
         )
     logger.info(f"File saved successfully: {unique_filename}")
     return {
+        "document_id": document_id,
         "original_filename": file.filename,
         "stored_filename": unique_filename,
         "file_path": file_path

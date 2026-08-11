@@ -6,7 +6,7 @@ from app.services.embedding_service import generate_embeddings
 from app.services.vector_store import add_documents
 
 
-def process_document(pdf_path: Path):
+def process_document(pdf_path: Path, document_id: str, original_filename: str):
     """
     Complete RAG ingestion pipeline
     """
@@ -17,7 +17,7 @@ def process_document(pdf_path: Path):
 
     embeddings = generate_embeddings(chunks)
 
-    add_documents(chunks, embeddings)
+    add_documents(chunks, embeddings, document_id, original_filename)
 
     return{
         "chunks": len(chunks),

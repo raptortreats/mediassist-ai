@@ -13,13 +13,16 @@ async def upload_pdf(file: UploadFile = File(...)):
     upload_response = await save_pdf(file)
 
     process_document(
-        Path("uploads") / upload_response["stored_filename"]   
+        Path("uploads") / upload_response["stored_filename"],
+        upload_response["document_id"],
+        upload_response["original_filename"]   
 
     )
 
     return UploadResponse(
 
         message="File uploaded successfully",
+        document_id=upload_response["document_id"],
         original_filename=upload_response["original_filename"],
         stored_filename=upload_response["stored_filename"],
     )

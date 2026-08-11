@@ -9,7 +9,10 @@ router = APIRouter(prefix="/chat", tags=["Chat"])
 @router.post("/", response_model=ChatResponse)
 def chat(request: ChatRequest):
 
-    result = search_document(request.question)
+    result = search_document(
+        request.question,
+        request.document_id
+        )
 
     return ChatResponse(
         answer=result["answer"]
